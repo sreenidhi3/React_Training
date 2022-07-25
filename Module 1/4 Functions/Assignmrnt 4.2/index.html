@@ -1,0 +1,32 @@
+<html>
+	<head>
+		<title> Assignment 4.1</title>
+	</head>
+	<body>
+		<h3>Assignment 4.2</h3>
+		Take a function that accepts a function as a parameter (also known as callback function). 
+		<code>
+			<br/>function test(callback){<br/>
+				callback();<br/>
+			}<br/>
+			<br/>
+			function callbackFunc(){<br/>
+				console.log(“Calling the callback function”)<br/>
+			return 5;<br/>
+			}<br/>
+		</code>
+		Explore the following cases - what is printed in the console, and what gets returned:
+		<br/>1. test(callbackFunc)
+		<br/>--> we are passing refernce to callbackFunc as an argurment which is called when we call <code>callback();</code>
+		<br/><br/>2. test(callbackFunc())
+		<br/>--> we are calling callbackFunc function as we pass it as an argurment. The callbackFunc is hence called twice, and when calling callback() inside test(), it throws an error as is tries to call callBackFunc()() which is not a function
+		<br/><br/>3. test(() => callbackFunc())
+		<br/>--> we are passing a unnamed function which in turn calls callbackFunc function in its body. 
+		<br/><br/>4. What happens when you return callback() from the test function?
+		<br/>--> we return a function call
+		<br/><br/>5. What happens when you return callback from the test function?
+		<br/>--> we return a refernce to a function, hence callbackFunc is never called during the execution on test
+
+		<script src="index.js"></script>
+	</body>
+</html>

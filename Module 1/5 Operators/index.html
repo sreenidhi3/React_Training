@@ -1,0 +1,25 @@
+<html>
+	<head>
+		<title> Assignment 5</title>
+	</head>
+	<body>
+		<h3>Assignment 5</h3>
+
+		<br/><br/>1. What is the difference between ++i and i++?
+		<br/>--> ++i is a prefix operation, the incrementation is performed before and then the value of i is used
+		<br/>--> i++ is postfix operation, the expression is evaluated/statement is performed first and then the value of i is incremented
+		<br/>	
+		<br/><br/>2. What do you think would happen if you pass an index beyond the range of the string? Or if you pass a negative index? Try it out.
+		<br/>--> it will return "undefined" in both the cases. JS does not support negative indexing.
+		<br/><br/>3. Do you think JSON.stringify would work for arrays as well? What about nested objects? What happens if we pass numbers, strings, undefined, null to JSON.stringify?
+		<br/>--> yes JSON.stringify works on arrays as well. If we pass null, undefined, numbers or strings, JSON.stringify still returns a string version of its arguments
+		<br/><br/>4. What happens when you return callback() from the test function?
+		<br/>--> we return a function call
+		<br/><br/>5. What happens if you pass a regular/invalid JSON string to JSON.parse? 
+		What will happen if such an invalid function runs in the program? 
+		Will other parts of the code execute correctly after that?
+		<br/>--> it throws error if invalid string is passed. No, the remaining code also does not execute if the error is encountered.
+
+		<script src="index.js"></script>
+	</body>
+</html>

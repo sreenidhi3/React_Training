@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<title> Assignment 4.1</title>
+	</head>
+	<body>
+		<h3>Assignment 4.1</h3>
+		1. What happens when you add a for loop/while loop/switch case block inside a function and use return instead of break?Do statements after the loop run? 
+		<br/>2. What is the return value? Can we pass a return value from within a loop? 
+		<br/>3. Can you return from inside an if block? What impact does that have?
+
+		<h5>Answers</h5>
+		<br/>	<br/>	
+		1. If we use return instead of break, return statement not only breaks the loop but also returns from the function without executing remaining lines of code present out of the loop
+		<br/><br/>
+		2. The return value is the result we pass from the function to main code. By default empty return statement return undefined.
+		We cannot return a value directly from the loop as it will return from the function as well, and irrespective of the conditions the iteration will run only once upto return statement.
+		But we can use return in loop with if else conditions to return out of the function upon encountering a special condtition..
+		<br/><br/>
+		3. Yes we can return value from if block present within a function. It exits the function immediately.
+		<script src="index.js"></script>
+	</body>
+</html>
