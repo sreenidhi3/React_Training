@@ -5,4 +5,6 @@ export interface PostLoginPayload {
   
 export interface PostLoginResponse {
     token: string;
+    error?: string;
+    
 }
