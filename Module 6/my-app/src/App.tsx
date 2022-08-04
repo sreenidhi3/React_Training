@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
-import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
+import { BrowserRouter, Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import './App.css';
 import { postLogin } from './services/login.services';
-import { getUsers } from './services/user.services';
+import { getUser, getUsers } from './services/user.services';
 import { User } from './types/users.types';
 
 let emailRegex =  /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/
@@ -107,6 +107,28 @@ const Login=()=>{
   );
 }
 
+const UserDetails=()=>{
+  const [user, setUser] = useState<User>()
+  // const [id, setId] = useState<string | undefined>()
+  
+  let  {userId} = useParams();
+  // console.log(useParams())
+  useEffect(()=>{
+   getUser(userId as string).then((res)=>setUser(res.data))
+  },[])
+  console.log(user)
+  return(
+    <div>
+      <img src = {user?.avatar} alt = {user?.first_name}/>
+      <div>
+        {user?.first_name } {user?.last_name}
+        <br/>
+        {user?.email}
+      </div>
+    </div>
+  )
+}
+
 const UserList=()=>{
   const [users, setUsers] = useState<User[]>([])
   const [searchText, setSearchText] = useState<string>("")
@@ -128,7 +150,7 @@ const UserList=()=>{
 
   useEffect(()=>{
     getUsers().then((data)=> setUsers(data.data))
-    console.log(users)
+    // console.log(users)
   },[])
 
   return(
@@ -145,12 +167,14 @@ const UserList=()=>{
         <th>Last Name</th>
         <th>Email</th>
       </tr>
-      {sortedUsers.map((user)=> <tr key={user.id}>
-        <td><img src={user.avatar}/></td>
+      {sortedUsers.map((user)=> 
+        <tr key={user.id} >
+        <td><Link to={user.id.toString()}><img src={user.avatar}/></Link></td>
         <td>{user.first_name}</td>
         <td>{user.last_name}</td>
         <td>{user.email}</td>
-      </tr>)}
+      </tr>
+      )}
       </tbody>
     </table>
     </div>
@@ -166,6 +190,7 @@ function App() {
     <Routes>
       <Route path="/login" element={<Login/>}/>
       <Route path="/users" element={<UserList/>}/>
+      <Route path="/users/:userId" element={<UserDetails />} />
     </Routes>
   </BrowserRouter>)
 }

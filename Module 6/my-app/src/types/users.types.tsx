@@ -6,6 +6,14 @@ export interface User{
     avatar: string;
 }
 
+export interface SingleUserResponse{
+    data: User,
+    support: {
+        url: string;
+        text: string;
+    }
+}
+
 export interface UsersResponse{
     page: number;
     per_page: number;
