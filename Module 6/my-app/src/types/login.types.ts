@@ -8,3 +8,16 @@ export interface PostLoginResponse {
     error?: string;
     
 }
+
+export interface LoginState{
+    email:{
+      value: string;
+      error: string;
+      touched: boolean;
+    },
+    password:{
+      value: string;
+      error: string;
+      touched: boolean;
+    }
+  }

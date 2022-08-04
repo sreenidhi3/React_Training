@@ -1,4 +1,5 @@
 import { useReducer, useState } from 'react';
+import { BrowserRouter, Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import { postLogin } from './services/login.services';
 
@@ -22,44 +23,42 @@ interface ReducerAction{
   payload?:any;
 }
 
-function App() {
-  // const [email, setEmail] =  useState<string>("eve.holt@reqres.in")
-  // const [password, setPassword] =  useState<string>("cityslicka")
-  const [token, setToken] = useState<string>("")
+const LoginReducer = (state:LoginState, action:ReducerAction):LoginState=>{
+  switch (action.type){
+    case "ON_EMAIL_CHANGE":
+      let updatedEmail = {value: action.payload, error:""}
+      if(! emailRegex.test(action.payload)){
+        updatedEmail.error = "Enter a valid email"
+      }
+      return {...state, email: {...state.email, ...updatedEmail} }
+    case "ON_PASSWORD_CHANGE":
+      let updatedPassword = {value: action.payload, error:""}
+      if(action.payload.length < 6){
+        updatedPassword.error="Password should be greater than 6 characters"
+      }
+      return {...state, password:{...state.password, ...updatedPassword} }
+    case "SET_EMAIL_TOUCHED":
+      return {...state, email:{...state.email, touched:true}}
+    case "SET_PASSWORD_TOUCHED":
+      return {...state, password:{...state.password, touched:true}}
+    default:
+      return state
+  }
+}
 
+const Login=()=>{
+  const [token, setToken] = useState<string>("")
+  let navigate = useNavigate()
   let initialState = {
     email:{
-      value: "",
+      value: "eve.holt@reqres.in",
       error: "",
       touched: false
     },
     password:{
-      value: "",
+      value: "cityslicka",
       error: "",
       touched: false
-    }
-  }
-
-  const LoginReducer = (state:LoginState, action:ReducerAction):LoginState=>{
-    switch (action.type){
-      case "ON_EMAIL_CHANGE":
-        let updatedEmail = {value: action.payload, error:""}
-        if(! emailRegex.test(action.payload)){
-          updatedEmail.error = "Enter a valid email"
-        }
-        return {...state, email: {...state.email, ...updatedEmail} }
-      case "ON_PASSWORD_CHANGE":
-        let updatedPassword = {value: action.payload, error:""}
-        if(action.payload.length < 6){
-          updatedPassword.error="Password should be greater than 6 characters"
-        }
-        return {...state, password:{...state.password, ...updatedPassword} }
-      case "SET_EMAIL_TOUCHED":
-        return {...state, email:{...state.email, touched:true}}
-      case "SET_PASSWORD_TOUCHED":
-        return {...state, password:{...state.password, touched:true}}
-      default:
-        return state
     }
   }
 
@@ -69,7 +68,7 @@ function App() {
    const token = postLogin({email: loginState.email.value, password:loginState.password.value}).then((data)=>{
       setToken(data.token);
       console.log(data)
-  })
+  }).then((data)=>navigate("/users")).catch(err => console.log(err))
 }
 
   return (
@@ -104,6 +103,23 @@ function App() {
       </header>
     </div>
   );
+}
+
+const UserList=()=>{
+  return <>Users List</>
+
+}
+
+function App() {
+  // const [email, setEmail] =  useState<string>("eve.holt@reqres.in")
+  // const [password, setPassword] =  useState<string>("cityslicka")
+  return (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/users" element={<UserList/>}/>
+    </Routes>
+  </BrowserRouter>)
 }
 
 export default App;
