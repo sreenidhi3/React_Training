@@ -6,7 +6,7 @@ import { RootState } from "../../store";
 import { setToken } from "../../actions/login.actions";
 let emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
 
-interface LoginState {
+export interface LoginState {
   email: {
     value: string;
     error: string;
@@ -24,7 +24,7 @@ interface ReducerAction {
   payload?: any;
 }
 
-const LoginReducer = (state: LoginState, action: ReducerAction): LoginState => {
+export const LoginReducer = (state: LoginState, action: ReducerAction): LoginState => {
   switch (action.type) {
     case "ON_EMAIL_CHANGE":
       let updatedEmail = { value: action.payload, error: "" };
