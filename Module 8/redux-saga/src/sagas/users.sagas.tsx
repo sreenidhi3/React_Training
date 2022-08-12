@@ -1,25 +1,28 @@
-import { call,put, all, takeEvery, takeLatest } from "redux-saga/effects"
+import { call,put, all, takeEvery, takeLatest, fork } from "redux-saga/effects"
 import { setUsersListAction, actions, fetchUserActionType } from "../actions/users.action"
 import { ReducerActionType } from "../reducers/users.reducer"
 import { fetchUsers } from "../services/users.services"
-import { UsersResponseType } from "../types/users.types"
+import { User, UsersResponseType } from "../types/users.types"
 
-function* watcherFetchUserSaga(){
+export function* watcherFetchUserSaga(){
+    console.log("watcher saga" )
     yield takeEvery(actions.FETCH, workerFetchUserSaga)
 }
 
-function* workerFetchUserSaga(action : fetchUserActionType){
+export function* workerFetchUserSaga(action : fetchUserActionType){
     try{
-        const response:UsersResponseType = yield call(fetchUsers)
-        yield put(setUsersListAction(response.users))
+        console.log("in the worker saga ");
+        const response:User[] = yield call(fetchUsers)
+        console.log("resp", response)
+        yield put(setUsersListAction(response as User[]))
     }catch(err){
         console.log(err)
     }
 }
 
-
 export function* rootSaga() {
-    yield all([watcherFetchUserSaga()])
+    console.log("in the root saga ");
+    yield all([call(watcherFetchUserSaga)])
 }
 // export function* fetchUserSaga(action:ReducerActionType) {
 //     try{

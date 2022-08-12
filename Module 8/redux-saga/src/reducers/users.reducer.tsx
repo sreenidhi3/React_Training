@@ -14,8 +14,10 @@ let initialState:UserState = {
 }
 export const userReducer = (state=initialState, action: ReducerActionType):UserState=>{
     switch(action.type){
-        case "SET_USERS":
-            return {...state, users: action.payload as User[]}
+        case "SET_USERS":{
+            console.log(action.payload);
+            
+            return {...state, users: action.payload as User[]}}
         case "FETCH_USERS":
             return state
         case "FETCH":

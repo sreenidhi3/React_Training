@@ -39,7 +39,7 @@ function App() {
       <button onClick={()=>{console.log("dispatching FETCH"); dispatch(fetchAction())}}>Fetch Users</button>
        {/* <p>{isLoading && "Loading..."}</p>
       <p>{error ? "Error" : ""}</p> */}
-      {state.users.slice(0,5).map(user=><p key={user.id}>{user.login}</p>)}
+      {state.users && state.users.slice(0,5).map(user=><p key={user.id}>{user.login}</p>)}
       </div>
     </div>
   );
