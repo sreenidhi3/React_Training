@@ -1,5 +1,5 @@
 import { call,put, all, takeEvery, takeLatest, fork } from "redux-saga/effects"
-import { setUsersListAction, actions, fetchUserActionType } from "../actions/users.action"
+import { setUsersListAction, actions, fetchUserActionType, setIsLoadingAction } from "../actions/users.action"
 import { ReducerActionType } from "../reducers/users.reducer"
 import { fetchUsers } from "../services/users.services"
 import { User, UsersResponseType } from "../types/users.types"
@@ -12,9 +12,11 @@ export function* watcherFetchUserSaga(){
 export function* workerFetchUserSaga(action : fetchUserActionType){
     try{
         console.log("in the worker saga ");
+        yield put(setIsLoadingAction(true))
         const response:User[] = yield call(fetchUsers)
         console.log("resp", response)
         yield put(setUsersListAction(response as User[]))
+        yield put(setIsLoadingAction(false))
     }catch(err){
         console.log(err)
     }

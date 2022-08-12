@@ -19,7 +19,7 @@ import {
 function App() {
   const dispatch = useDispatch();
   // const queryClient = useQueryClient()
-  const [isLoading, setIsLoading] = useState<boolean>(false)
+  // const [isLoading, setIsLoading] = useState<boolean>(false)
   const state = useSelector((state: RootState) => state.userReducer);
   
     // console.log("state,", data)
@@ -28,7 +28,7 @@ function App() {
       <div>
       {/* <button onClick={()=>dispatch(fetchUsersAction())}>Fetch Users</button> */}
       <button onClick={()=>{ 
-        dispatch(dispatch(setIsLoadingAction(!isLoading)));
+        // dispatch(dispatch(setIsLoadingAction(true)));
         dispatch(fetchAction())}}
       >
         Fetch Users

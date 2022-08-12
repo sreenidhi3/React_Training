@@ -21,7 +21,7 @@ export const userReducer = (state=initialState, action: ReducerActionType):UserS
     switch(action.type){
         case "SET_USERS":{
             console.log(action.payload);
-            return {...state, isLoading:false, users: action.payload as User[]}}
+            return {...state, users: action.payload as User[]}}
         case "FETCH_USERS":
             return state
         case "SET_IS_LOADING":
