@@ -1,16 +1,43 @@
-import { render } from "@testing-library/react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import { clearUserAction } from "../actions/login.actions";
+import { RootState } from "../store";
+import "../styles/navBar.styles.css"
 
 const NavBar = ()=>{
+    const dispatch = useDispatch();
+    const state = useSelector((state: RootState) => state.loginReducer);
     return(
-        <nav>
+        <nav className="navbar">
             <div className="brand-logo">
-                <h3>Store</h3>
+            <Link to="/">Store</Link>
             </div>
+           
             <div className="nav-links">
+            <div className="nav-link">
+            <Link to="/products">Products</Link>
+            </div>
+            { state.isUserLoggedIn ? (
+                <div className="nav-links">
+                    <div className="nav-link">
+                    <Link to="/cart">Cart</Link>
+                    </div>
+                    <div className="nav-link" onClick={()=>dispatch(clearUserAction())}>
+                    <Link to="/">Logout</Link>
+                    </div>
+                </div>
+           ) : (
+           <div className="nav-links">
                 <div className="nav-link">
-                    NavLink
+                <Link to="/login">Login</Link>
+                </div>
+                <div className="nav-link">
+                <Link to="/signup">SignUp</Link>
                 </div>
             </div>
+            )
+        }
+        </div>
         </nav>
     )
 }
