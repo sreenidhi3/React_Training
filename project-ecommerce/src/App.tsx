@@ -3,6 +3,7 @@ import "./styles/globals.css"
 import NavBar from './components/NavBar';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from './store';
+import LoginForm from './components/LoginForm';
 
 const Login =()=>{
   return(
@@ -49,11 +50,11 @@ function App() {
   const state = useSelector((state: RootState) => state.loginReducer);
   console.log(state)
   return (
-  <div>
+  <div className='app'>
     <NavBar/>
       <Routes>
       <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<Login/>}/>
+        <Route path="/login" element={<LoginForm/>}/>
         <Route path="/signup" element={<SignUp/>}/>
         <Route path="/products" element={<Products />} />
         <Route path="/cart" element={<Cart />} />
