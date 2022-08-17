@@ -1,0 +1,26 @@
+.navbar{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+  background-color: var(--primary-100);
+  box-shadow: 0px 2px 2px var(--primary-200);
+}
+
+.nav-links{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  
+}
+
+.nav-link{
+  padding:0.5rem;
+}
+
+.brand-logo{
+  text-transform: capitalize;
+  font-size: x-large;
+  font-weight: 800;
+}
