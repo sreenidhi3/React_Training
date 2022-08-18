@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from './store';
 import LoginForm from './components/LoginForm';
+import SignUp from './components/SignUp';
 
 const Login =()=>{
   return(
@@ -33,14 +34,6 @@ const Cart =()=>{
   return(
     <div>
      <h2>Cart</h2>
-    </div>
-  )
-}
-
-const SignUp =()=>{
-  return(
-    <div>
-     <h2>SignUp</h2>
     </div>
   )
 }
