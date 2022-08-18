@@ -1,6 +1,6 @@
 import { call,put, all, takeEvery, takeLatest, fork } from "redux-saga/effects"
 import { login } from "../login.service";
-import { loginUserAction, setUserAction } from "../actions/login.actions";
+import { loginUserAction, setLoginError, setUserAction } from "../actions/login.actions";
 import { LoginResponseType, LoginActionsType, LoginReducerActionsType, LoginRequestType, loginUserActionType } from "../types/login.types";
 
 
@@ -14,6 +14,7 @@ export function* workerLoginSaga(action:loginUserActionType){
         yield put(setUserAction({email: action.payload.email,...response}))
         // yield put(setIsLoadingAction(false))
     }catch(err){
+        yield put(setLoginError({error:err as string}))
         console.log(err)
     }
 }

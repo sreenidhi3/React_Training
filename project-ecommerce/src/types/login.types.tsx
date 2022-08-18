@@ -1,11 +1,12 @@
 export interface LoginReducerActionType{
     type:string;
-    payload?:LoginUser | ClearUser;
+    payload?:LoginUser | ClearUser | LoginErrorType;
 }
 
 export interface LoginUserState{
     isUserLoggedIn: boolean
     user: LoginUser,
+    error: string
 }
 
 export interface LoginUser{
@@ -16,6 +17,10 @@ export interface LoginUser{
 
 export interface ClearUser{
     isUserLoggedIn : false
+}
+
+export interface LoginErrorType{
+    error: string;
 }
 
 export interface LoginRequestType{
@@ -29,14 +34,16 @@ export interface LoginResponseType{
 
 export interface LoginActionsType{
     SET_USER: "SET_USER",
-    CLEAR_USER: "CLEAR_USER"
-    LOGIN_USER: "LOGIN_USER"
+    CLEAR_USER: "CLEAR_USER",
+    LOGIN_USER: "LOGIN_USER",
+    LOGIN_ERROR: "LOGIN_ERROR"
 }
   
 export const LoginReducerActionsType:LoginActionsType = {
     SET_USER: "SET_USER",
     CLEAR_USER: "CLEAR_USER",
-    LOGIN_USER: "LOGIN_USER"
+    LOGIN_USER: "LOGIN_USER",
+    LOGIN_ERROR: "LOGIN_ERROR"
 }
 
 export interface setUserActionType{
@@ -52,4 +59,9 @@ export interface clearUserActionType{
 export interface loginUserActionType{
     type: LoginActionsType["LOGIN_USER"],
     payload: LoginRequestType
+}
+
+export interface setLoginErrorType{
+    type: LoginActionsType["LOGIN_ERROR"],
+    payload: LoginErrorType
 }

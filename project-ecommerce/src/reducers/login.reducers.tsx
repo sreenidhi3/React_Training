@@ -6,8 +6,9 @@ let initialState:LoginUserState = {
     user: {
         name: "",
         email:"",
-        token:""
-    }
+        token:"",
+    },
+    error: ""
 }
 
 export const loginReducer = (state=initialState, action: LoginReducerActionType):LoginUserState=>{
@@ -19,6 +20,10 @@ export const loginReducer = (state=initialState, action: LoginReducerActionType)
         case "CLEAR_USER":{
             console.log(action.payload);
             return {...initialState, isUserLoggedIn:false}
+        }
+        case "LOGIN_ERROR":{
+            console.log(action.payload)
+            return {...initialState, isUserLoggedIn:false, ...action.payload}
         }
         default:
             return state

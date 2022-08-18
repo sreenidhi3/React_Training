@@ -1,4 +1,4 @@
-import { ClearUser, clearUserActionType, LoginRequestType, LoginUser, loginUserActionType, setUserActionType } from "../types/login.types";
+import { ClearUser, clearUserActionType, LoginErrorType, LoginRequestType, LoginUser, loginUserActionType, setLoginErrorType, setUserActionType } from "../types/login.types";
 
   //ACTIONS 
   export const loginUserAction=(payload:LoginRequestType):loginUserActionType=>{
@@ -14,3 +14,6 @@ import { ClearUser, clearUserActionType, LoginRequestType, LoginUser, loginUserA
     return({type:"CLEAR_USER", payload: {isUserLoggedIn: false}})
   }
   
+  export const setLoginError=(payload: LoginErrorType):setLoginErrorType=>{
+    return({type:"LOGIN_ERROR", payload})
+  }
