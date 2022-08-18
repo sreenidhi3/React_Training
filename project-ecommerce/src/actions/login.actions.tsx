@@ -1,33 +1,8 @@
-import { ClearUser, LoginRequestType, LoginUser } from "../types/login.types";
-
-interface LoginActionsType{
-    SET_USER: "SET_USER",
-    CLEAR_USER: "CLEAR_USER"
-  }
-  
-  export interface setUserActionType{
-    type: "SET_USER",
-    payload: LoginUser;
-  }
-  
-  export interface clearUserActionType{
-    type: "CLEAR_USER",
-    payload: ClearUser
-  }
-
-  export interface loginUserActionType{
-    type: "LOGIN_USER",
-    payload: LoginRequestType
-  }
-  
-  export const actions:LoginActionsType = {
-    SET_USER: "SET_USER",
-    CLEAR_USER: "CLEAR_USER"
-  }
+import { ClearUser, clearUserActionType, LoginRequestType, LoginUser, loginUserActionType, setUserActionType } from "../types/login.types";
 
   //ACTIONS 
-  export const loginUserAction=()=>{
-
+  export const loginUserAction=(payload:LoginRequestType):loginUserActionType=>{
+    return({type: "LOGIN_USER", payload})
   }
 
   export const setUserAction = (payload: LoginUser):setUserActionType=>{

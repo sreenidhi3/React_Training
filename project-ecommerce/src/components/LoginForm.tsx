@@ -1,7 +1,7 @@
 import {useState} from 'react'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { setUserAction } from '../actions/login.actions'
+import { setUserAction, loginUserAction } from '../actions/login.actions'
 import { login } from '../login.service'
 import { loginReducer } from '../reducers/login.reducers'
 const LoginForm =()=>{
@@ -12,10 +12,10 @@ const LoginForm =()=>{
 
     const handleSubmit = async (e:any)=>{
         e.preventDefault()
-        const data = await login({email, password})
-        dispatch(setUserAction({email, ...data}))
-        console.log(data)
-        navigate("/products")
+        // const data = await login({email, password})
+        dispatch(loginUserAction({email, password}))
+        // console.log(data)
+        // navigate("/products")
     }
 
     return(

@@ -19,10 +19,37 @@ export interface ClearUser{
 }
 
 export interface LoginRequestType{
-        email: string,
-        password: string
+    email: string,
+    password: string
 }
 
 export interface LoginResponseType{
-        token: string
+    token: string
+}
+
+export interface LoginActionsType{
+    SET_USER: "SET_USER",
+    CLEAR_USER: "CLEAR_USER"
+    LOGIN_USER: "LOGIN_USER"
+}
+  
+export const LoginReducerActionsType:LoginActionsType = {
+    SET_USER: "SET_USER",
+    CLEAR_USER: "CLEAR_USER",
+    LOGIN_USER: "LOGIN_USER"
+}
+
+export interface setUserActionType{
+    type: LoginActionsType["SET_USER"]
+    payload: LoginUser;
+}
+
+export interface clearUserActionType{
+    type: LoginActionsType["CLEAR_USER"],
+    payload: ClearUser
+}
+
+export interface loginUserActionType{
+    type: LoginActionsType["LOGIN_USER"],
+    payload: LoginRequestType
 }
