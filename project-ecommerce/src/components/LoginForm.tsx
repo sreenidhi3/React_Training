@@ -1,10 +1,10 @@
 import { stat } from 'fs'
-import {useState} from 'react'
+import {useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { setUserAction, loginUserAction } from '../actions/login.actions'
-import { login } from '../login.service'
-import { loginReducer } from '../reducers/login.reducers'
+// import { login } from '../services/login.service'
+// import { loginReducer } from '../reducers/login.reducers'
 import { RootState } from '../store'
 const LoginForm =()=>{
     const state = useSelector((state: RootState) => state.loginReducer);
@@ -14,6 +14,14 @@ const LoginForm =()=>{
     let navigate = useNavigate()
     const [errEmail, setErrEmail] = useState("")
     const [errPassword, setErrPassword] = useState("")
+
+    useEffect(()=>{
+        if(state.isUserLoggedIn){
+            navigate("/products") 
+        }
+        // console.log("hi")
+    })
+
     let emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
     const handleSubmit = async (e:any)=>{
         // e.preventDefault()

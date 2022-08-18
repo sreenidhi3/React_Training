@@ -1,5 +1,5 @@
 import { call,put, all, takeEvery, takeLatest, fork } from "redux-saga/effects"
-import { login } from "../login.service";
+import { login } from "../services/login.service";
 import { loginUserAction, setLoginError, setUserAction } from "../actions/login.actions";
 import { LoginResponseType, LoginActionsType, LoginReducerActionsType, LoginRequestType, loginUserActionType } from "../types/login.types";
 
