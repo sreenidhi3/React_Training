@@ -51,6 +51,23 @@
     width: 60%;
   }
 
+  .row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .col{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  .center{
+    align-items: center;
+    justify-content: center;
+  }
+
   input{
     padding: 1rem;
     margin-top: 1rem;
@@ -75,6 +92,21 @@
     background-color: var(--primary-color);
     border: 1px solid var(--primary-500);
     width: 100%;
+    padding: 1rem;
+    border-radius: 0.6rem;
+    color: var(--white);
+    font-size: medium;
+  }
+
+  .btn-primary-full:hover{
+    cursor: pointer;
+    background-color: var(--primary-500);
+    border: 1px solid var(--primary-500); 
+  }
+
+  .btn-primary{
+    background-color: var(--primary-color);
+    border: 1px solid var(--primary-400);
     padding: 1rem;
     border-radius: 1rem;
     color: var(--white);
