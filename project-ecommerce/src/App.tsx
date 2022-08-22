@@ -10,14 +10,10 @@ import Catalogue from './pages/Catalogue';
 import { fecthAllCategories, fecthAllProducts } from './services/products.service';
 import { fetchCategoriesAction } from './types/products.types';
 import { fetchProductsAction } from './actions/products.actions';
-
-const Products =()=>{
-  return(
-    <div>
-     <h2>Products</h2>
-    </div>
-  )
-}
+import Cart from './pages/Cart';
+import ProdDetails from './pages/ProdDetails';
+import Error from './pages/Error';
+import Payment from './pages/Payment';
 
 const Home =()=>{
   return(
@@ -27,10 +23,11 @@ const Home =()=>{
   )
 }
 
-const Cart =()=>{
+const Success=()=>{
   return(
     <div>
-     <h2>Cart</h2>
+      <h1 className='text-center'>Order Placed Successfully!</h1>
+      <p className='text-center'><Link to="/" style={{color:"var(--primary-color)"}}>Back to Home</Link></p>
     </div>
   )
 }
@@ -48,16 +45,21 @@ function App() {
   }, [])
   console.log(state)
   return (
-  <div className='app'>
-    <NavBar/>
-      <Routes>
-      <Route path="/" element={<Home/>}/>
-        <Route path="/login" element={<LoginForm/>}/>
-        <Route path="/signup" element={<SignUp/>}/>
-        <Route path="/products" element={<Catalogue />} />
-        <Route path="/cart" element={<Cart />} />
-      </Routes>
-  </div>
+    <div className='app'>
+      <NavBar/>
+        <Routes>
+          <Route path="/" element={<Home/>}/>
+          <Route path="/error" element={<Error/>} />
+          <Route path="/login" element={<LoginForm/>}/>
+          <Route path="/signup" element={<SignUp/>}/>
+          <Route path="/products" element={<Catalogue />} />
+          <Route path="/products/:prodId" element={<ProdDetails />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/success" element={<Success />} />
+          <Route path='*' element={<Error/>}/>
+        </Routes>
+    </div>
   );
 }
 
