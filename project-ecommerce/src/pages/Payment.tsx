@@ -1,14 +1,23 @@
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 import { checkoutAction } from "../actions/products.actions";
+import { RootState } from "../store";
 import "../styles/products.styles.css"
 
 const Payment = ()=>{
     const dispatch = useDispatch()
+    const {isUserLoggedIn, user} = useSelector((state:RootState)=> state.loginReducer)
+    const navigate = useNavigate()
 
     const handleClick=()=>{
         dispatch(checkoutAction())
     }
+    useEffect(()=>{
+        if(!isUserLoggedIn){
+            navigate("/login")
+        }
+    },[])
     return(
         <div className="p-2">
             <h1 className="text-center">Proceed with Payment</h1>
