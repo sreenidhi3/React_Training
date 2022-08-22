@@ -85,3 +85,9 @@
     background-color: var(--primary-300);
     cursor: pointer;
 }
+
+.category{
+    padding: 1rem;
+    margin: 1rem;
+    text-transform: capitalize;
+}
