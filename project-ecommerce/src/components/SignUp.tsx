@@ -5,6 +5,7 @@ import { RootState } from '../store'
 import { signUpUserAction } from '../actions/signup.actions'
 const SignUp =()=>{
     const state = useSelector((state: RootState) => state.signUpReducer);
+    const {isUserLoggedIn} = useSelector((state:RootState)=>state.loginReducer)
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>("")
     const dispatch = useDispatch()
@@ -19,7 +20,7 @@ const SignUp =()=>{
 
     useEffect(()=>{
         if(state.isUserSignedUp){
-            navigate("/products") 
+            navigate("/login") 
         }
     })
 
