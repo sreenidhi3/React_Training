@@ -24,7 +24,7 @@ export interface CategoryType{
 
 export interface ProductReducerActionType{
     type:string;
-    payload?: ProductType[] | singleCategoryType[] | singleCategoryType ;
+    payload?: ProductType[] | singleCategoryType[] | singleCategoryType | number ;
 }
 
 // export const categories={
@@ -40,7 +40,13 @@ export interface ProductActionsType{
     SET_PRODUCTS: "SET_PRODUCTS",
     FETCH_PRODUCTS: "FETCH_PRODUCTS",
     SET_ACTIVE_CATEGORY: "SET_ACTIVE_CATEGORY",
-    SET_ACTIVE_CATEGORY_PRODUCTS: "SET_ACTIVE_CATEGORY_PRODUCTS"
+    SET_ACTIVE_CATEGORY_PRODUCTS: "SET_ACTIVE_CATEGORY_PRODUCTS",
+    ADD_TO_CART: "ADD_TO_CART",
+    REMOVE_FROM_CART: "REMOVE_FROM_CART",
+    ADD_TO_CART_A: "ADD_TO_CART_A",
+    REMOVE_FROM_CART_A: "REMOVE_FROM_CART_A",
+    CHECKOUT: "CHECKOUT",
+    CLEAR_CART: "CLEAR_CART"
 }
   
 export const ProductsReducerActionsType:ProductActionsType = {
@@ -49,7 +55,13 @@ export const ProductsReducerActionsType:ProductActionsType = {
     FETCH_PRODUCTS: "FETCH_PRODUCTS",
     SET_PRODUCTS: "SET_PRODUCTS",
     SET_ACTIVE_CATEGORY: "SET_ACTIVE_CATEGORY",
-    SET_ACTIVE_CATEGORY_PRODUCTS: "SET_ACTIVE_CATEGORY_PRODUCTS"
+    SET_ACTIVE_CATEGORY_PRODUCTS: "SET_ACTIVE_CATEGORY_PRODUCTS",
+    ADD_TO_CART: "ADD_TO_CART",
+    REMOVE_FROM_CART: "REMOVE_FROM_CART",
+    ADD_TO_CART_A: "ADD_TO_CART_A",
+    REMOVE_FROM_CART_A: "REMOVE_FROM_CART_A",
+    CHECKOUT: "CHECKOUT",
+    CLEAR_CART: "CLEAR_CART"
 }
 
 export interface setProductsActionType{
@@ -67,6 +79,33 @@ export interface setActiveCategoryActionType{
     payload: singleCategoryType
 }
 
+export interface addToCartActionType{
+    type: ProductActionsType["ADD_TO_CART"],
+    payload: number
+}
+
+export interface removeFromCartActionType{
+    type: ProductActionsType["REMOVE_FROM_CART"],
+    payload: number
+}
+
+export interface addToCartActionAType{
+    type: ProductActionsType["ADD_TO_CART_A"],
+    payload: number
+}
+
+export interface removeFromCartActionAType{
+    type: ProductActionsType["REMOVE_FROM_CART_A"],
+    payload: number
+}
+
+export interface clearCartActionType{
+    type: ProductActionsType["CLEAR_CART"],
+}
+
+export interface checkoutActionType{
+    type: ProductActionsType["CHECKOUT"],
+}
 
 export interface fetchProductsActionType{
     type: "FETCH_PRODUCTS"
@@ -91,5 +130,6 @@ export interface ProductStateType{
     activeCategory:string,
     allCategories: singleCategoryType[],
     allProducts: ProductType[],
-    activeProducts: ProductType[]
+    activeProducts: ProductType[],
+    cart: ProductType[]
 }

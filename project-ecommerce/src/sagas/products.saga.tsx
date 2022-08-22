@@ -1,9 +1,9 @@
 import { call,put, all, takeEvery, takeLatest, fork } from "redux-saga/effects";
-import { fetchCategoriesActionType, fetchProductsActionType, ProductsReducerActionsType, ProductType, singleCategoryType } from "../types/products.types";
+import { addToCartActionAType, checkoutActionType, fetchCategoriesActionType, fetchProductsActionType, ProductsReducerActionsType, ProductType, removeFromCartActionAType, singleCategoryType } from "../types/products.types";
 import { signup } from "../services/signup.service";
 import { setSignUpError, setUserAction } from "../actions/signup.actions";
 import { fecthAllCategories, fecthAllProducts } from "../services/products.service";
-import { setCategoriesAction, setProductsAction } from "../actions/products.actions";
+import { addToCartAction, clearCartAction, removeFromCartAction, setCategoriesAction, setProductsAction } from "../actions/products.actions";
 
 
 export function* workerProductsFetchSaga(action:fetchProductsActionType){
@@ -34,8 +34,44 @@ export function* workerCategoriesFetchSaga(action:fetchCategoriesActionType){
     }
 }
 
+export function* workerAddToCartSaga(action:addToCartActionAType){
+    try{
+        console.log("in the worker add to cart saga ");
+        console.log(action);
+        yield put(addToCartAction(action.payload))
+        // yield put(setIsLoadingAction(false))
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export function* workerRemoveFromCartSaga(action:removeFromCartActionAType){
+    try{
+        console.log("in the worker remove from cart saga ");
+        console.log(action);
+        yield put(removeFromCartAction(action.payload))
+        // yield put(setIsLoadingAction(false))
+    }catch(err){
+        console.log(err)
+    }
+}
+
+export function* workerCheckoutSaga(action:checkoutActionType){
+    try{
+        console.log("in the worker checkout saga ");
+        console.log(action);
+        yield put(clearCartAction())
+    }catch(err){
+        console.log(err)
+    }
+}
+
+
 export function* watcherProductsSaga(){
     console.log("watcher products saga" )
     yield takeEvery(ProductsReducerActionsType.FETCH_PRODUCTS, workerProductsFetchSaga)
     yield takeEvery(ProductsReducerActionsType.FETCH_CATEGORIES, workerCategoriesFetchSaga)
+    yield takeEvery(ProductsReducerActionsType.ADD_TO_CART_A, workerAddToCartSaga)
+    yield takeEvery(ProductsReducerActionsType.REMOVE_FROM_CART_A, workerRemoveFromCartSaga)
+    yield takeEvery(ProductsReducerActionsType.CHECKOUT, workerCheckoutSaga)
 }
