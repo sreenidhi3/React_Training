@@ -14,16 +14,16 @@ import Cart from './pages/Cart';
 import ProdDetails from './pages/ProdDetails';
 import Error from './pages/Error';
 import Payment from './pages/Payment';
-
-const Home =()=>{
-  return(
-    <div>
-     <h2>Home</h2>
-    </div>
-  )
-}
+import Home from './pages/Home';
 
 const Success=()=>{
+  const {isUserLoggedIn, user} = useSelector((state:RootState)=> state.loginReducer)
+  const navigate = useNavigate()
+  useEffect(()=>{
+    if(!isUserLoggedIn){
+        navigate("/login")
+    }
+},[])
   return(
     <div>
       <h1 className='text-center'>Order Placed Successfully!</h1>
