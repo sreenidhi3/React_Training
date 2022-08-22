@@ -21,6 +21,13 @@
     border-radius: 5px; */
 }
 
+.img-cart{
+    width: 10rem;
+    height: 10rem;
+    object-fit: contain;
+    margin-top: 1rem;
+}
+
 .btn-added-to-cart{
     background-color: var(--green-600);
     border: 1px solid var(--primary-500);
@@ -65,4 +72,16 @@
 .search-btn:hover{
     cursor: pointer;
     background-color: var(--primary-500);
+}
+
+.option{
+    padding: 1rem;
+    border-radius: 0.7rem;
+    border: 1px solid var(--secondary-400);
+    margin: 1rem;
+}
+
+.option:hover{
+    background-color: var(--primary-300);
+    cursor: pointer;
 }

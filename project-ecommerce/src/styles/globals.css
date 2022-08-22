@@ -45,16 +45,27 @@
     flex-direction: column;
   }
 
+  .text-center{
+    text-align: center;
+  }
   .container{
     padding: 1rem;
     margin: 1rem auto;
     width: 60%;
   }
 
+  .p-2{
+    padding: 2rem;
+  }
+
   .row{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+  }
+
+  .no-wrap{
+    flex-wrap: nowrap;
   }
 
   .col{
