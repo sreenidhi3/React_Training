@@ -4,10 +4,18 @@ import { RootState } from "../store";
 import { ProductType } from "../types/products.types";
 import "../styles/products.styles.css"
 import CartCard from "../components/CartCard";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Cart=()=>{
+    const {isUserLoggedIn, user} = useSelector((state:RootState)=> state.loginReducer)
     const {cart} = useSelector((state: RootState) => state.productReducer);
+    const navigate = useNavigate()
+    useEffect(()=>{
+        if(!isUserLoggedIn){
+            navigate("/login")
+        }
+    },[])
     const calculateAmt=()=>{
         var amt:number=0;
         cart.map((item)=>{
