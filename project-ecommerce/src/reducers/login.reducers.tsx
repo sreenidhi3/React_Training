@@ -2,7 +2,7 @@ import { useReducer } from "react";
 import { LoginReducerActionType, LoginUser, LoginUserState } from "../types/login.types";
 
 let initialState:LoginUserState = {
-    isUserLoggedIn: true,
+    isUserLoggedIn: false,
     user: {
         name: "",
         email:"",
