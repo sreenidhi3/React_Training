@@ -4,14 +4,14 @@ import { RootState } from "../store";
 import { ProductType } from "../types/products.types";
 import "../styles/products.styles.css"
 import { useEffect, useMemo, useState } from "react";
-import { setActiveCategoryAction } from "../actions/products.actions";
+import { addToCartAction, setActiveCategoryAction, setCartAction } from "../actions/products.actions";
 
 const Catalogue=()=>{
 
-    const {allProducts, allCategories, activeCategory, activeProducts} = useSelector((state: RootState) => state.productReducer);
+    const {allProducts, allCategories, activeCategory, activeProducts, cart} = useSelector((state: RootState) => state.productReducer);
     const [search, setSearch] = useState<string>("")
     const dispatch=useDispatch()
-
+    
     const filteredProducts = useMemo(() =>{
         if(activeCategory){
            return activeProducts
@@ -30,7 +30,7 @@ const Catalogue=()=>{
                 {allCategories.map((cate)=>
                     <div className="category" 
                          key={cate} 
-                         style={{color: cate===activeCategory ? 'var(--primary-color)' : 'var(--secondary-700)', cursor:"pointer"}}
+                         style={{borderBottom: cate===activeCategory ? "2px solid var(--primary-color)": "",color: cate===activeCategory ? 'var(--primary-color)' : 'var(--secondary-700)', cursor:"pointer"}}
                          onClick={()=>dispatch(setActiveCategoryAction(cate))}
                     >
                         {cate}
