@@ -1,26 +1,32 @@
 import { FC, useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { Link } from "react-router-dom"
+import { Link, Navigate, useNavigate } from "react-router-dom"
 import { addToCartActionA, removeFromCartAction, removeFromCartActionA } from "../actions/products.actions"
 import { RootState } from "../store"
 import "../styles/products.styles.css"
 import { ProductType } from "../types/products.types"
 
 const ProductCard:FC<ProductType>=(prod:ProductType)=>{
+    const {isUserLoggedIn} = useSelector((state: RootState) => state.loginReducer);
     const {cart} = useSelector((state: RootState) => state.productReducer);
     const dispatch =  useDispatch();
+    const navigate = useNavigate()
     const [added, setAdded] = useState<boolean>(false)
     useEffect(()=>{
         let add = cart.filter((it)=>it.id===prod.id).length
         add ? setAdded(true) : setAdded(false)
     },[])
     const handleCart=(id:number)=>{
+        if(!isUserLoggedIn)
+            navigate("/login")
+        else{
         if(added){
             dispatch(removeFromCartActionA(id))
         }else{
             dispatch(addToCartActionA(id))
         }
         setAdded(!added)
+    }
 
     }
     // console.log("cart: ", cart)
