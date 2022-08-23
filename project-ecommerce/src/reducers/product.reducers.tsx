@@ -29,12 +29,16 @@ export const productReducer = (state=initialState, action: ProductReducerActionT
             return {...state, activeProducts:[...action.payload as ProductType[]]}
         }
         case "ADD_TO_CART":{
-            // console.log("pid", action.payload)
             const newProd = state.allProducts.filter((p)=>p.id===action.payload)
+            localStorage.setItem("cart", JSON.stringify({cart: [...state.cart, ...newProd]}))
             return {...state, cart: [...state.cart, ...newProd] as ProductType[]}
+        }
+        case "SET_CART":{
+            return {...state, cart: [...action.payload as ProductType[]]}
         }
         case "REMOVE_FROM_CART":{
             const filteredCart = state.cart.filter((p)=>p.id !== action.payload)
+            localStorage.setItem("cart", JSON.stringify({cart: [...filteredCart]}))
             return {...state, cart: [...filteredCart]}
         }
         case "CLEAR_CART":{

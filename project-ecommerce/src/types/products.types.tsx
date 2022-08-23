@@ -46,7 +46,8 @@ export interface ProductActionsType{
     ADD_TO_CART_A: "ADD_TO_CART_A",
     REMOVE_FROM_CART_A: "REMOVE_FROM_CART_A",
     CHECKOUT: "CHECKOUT",
-    CLEAR_CART: "CLEAR_CART"
+    CLEAR_CART: "CLEAR_CART",
+    SET_CART: "SET_CART"
 }
   
 export const ProductsReducerActionsType:ProductActionsType = {
@@ -61,7 +62,13 @@ export const ProductsReducerActionsType:ProductActionsType = {
     ADD_TO_CART_A: "ADD_TO_CART_A",
     REMOVE_FROM_CART_A: "REMOVE_FROM_CART_A",
     CHECKOUT: "CHECKOUT",
-    CLEAR_CART: "CLEAR_CART"
+    CLEAR_CART: "CLEAR_CART",
+    SET_CART: "SET_CART"
+}
+
+export interface setCartActionType{
+    type: ProductActionsType["SET_CART"]
+    payload: ProductType[]
 }
 
 export interface setProductsActionType{

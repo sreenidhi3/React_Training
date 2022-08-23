@@ -1,4 +1,4 @@
-import { addToCartActionAType, addToCartActionType, CategoryType, checkoutActionType, clearCartActionType, fetchCategoriesActionType, fetchProductsActionType, ProductType, removeFromCartActionAType, removeFromCartActionType, setActiveCategoryActionType, setActiveCategoryProductsActionType, setCategoriesActionType, setProductsActionType, singleCategoryType } from "../types/products.types"
+import { addToCartActionAType, addToCartActionType, CategoryType, checkoutActionType, clearCartActionType, fetchCategoriesActionType, fetchProductsActionType, ProductType, removeFromCartActionAType, removeFromCartActionType, setActiveCategoryActionType, setActiveCategoryProductsActionType, setCartActionType, setCategoriesActionType, setProductsActionType, singleCategoryType } from "../types/products.types"
 
 export const setProductsAction=(payload:ProductType[]):setProductsActionType=>{
     return({type: "SET_PRODUCTS", payload})
@@ -47,4 +47,8 @@ export const checkoutAction=():checkoutActionType=>{
 
 export const clearCartAction=():clearCartActionType=>{
     return({type:"CLEAR_CART"})
+}
+
+export const setCartAction=(payload: ProductType[]):setCartActionType=>{
+    return({type:"SET_CART", payload})
 }

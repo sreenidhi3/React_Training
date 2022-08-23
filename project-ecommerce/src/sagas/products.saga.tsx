@@ -39,6 +39,7 @@ export function* workerAddToCartSaga(action:addToCartActionAType){
         console.log("in the worker add to cart saga ");
         console.log(action);
         yield put(addToCartAction(action.payload))
+        // localStorage.setItem("cart", JSON.stringify({cart:}))
         // yield put(setIsLoadingAction(false))
     }catch(err){
         console.log(err)
@@ -60,6 +61,7 @@ export function* workerCheckoutSaga(action:checkoutActionType){
     try{
         console.log("in the worker checkout saga ");
         console.log(action);
+        localStorage.removeItem("cart")
         yield put(clearCartAction())
     }catch(err){
         console.log(err)
