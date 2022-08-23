@@ -10,9 +10,6 @@ const Payment = ()=>{
     const {isUserLoggedIn, user} = useSelector((state:RootState)=> state.loginReducer)
     const navigate = useNavigate()
 
-    const handleClick=()=>{
-        dispatch(checkoutAction())
-    }
     useEffect(()=>{
         if(!isUserLoggedIn){
             navigate("/login")
@@ -24,8 +21,8 @@ const Payment = ()=>{
             <p>Choose one of the following payment options: </p>
             <div className="row">
                 <Link to="/success">
-                    <div className="option" onClick={handleClick}>
-                    COD - Cash on Deliver
+                    <div className="option" >
+                        COD - Cash on Deliver
                     </div>
                 </Link>
                 <Link to="/success">
