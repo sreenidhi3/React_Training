@@ -9,17 +9,21 @@ import { useEffect } from 'react';
 import Catalogue from './pages/Catalogue';
 import { fecthAllCategories, fecthAllProducts } from './services/products.service';
 import { fetchCategoriesAction } from './types/products.types';
-import { fetchProductsAction } from './actions/products.actions';
+import { checkoutAction, fetchProductsAction } from './actions/products.actions';
 import Cart from './pages/Cart';
 import ProdDetails from './pages/ProdDetails';
 import Error from './pages/Error';
 import Payment from './pages/Payment';
 import Home from './pages/Home';
+import { LoginUser } from './types/login.types';
+import { setUserAction } from './actions/login.actions';
 
 const Success=()=>{
   const {isUserLoggedIn, user} = useSelector((state:RootState)=> state.loginReducer)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   useEffect(()=>{
+    dispatch(checkoutAction())
     if(!isUserLoggedIn){
         navigate("/login")
     }
@@ -33,6 +37,14 @@ const Success=()=>{
 }
 
 function App() {
+  let user:LoginUser;
+  useEffect(()=>{
+    user = JSON.parse(localStorage.getItem("user") as string)
+    // console.log("here", localStorage.getItem("user"))
+    if(user){
+      dispatch(setUserAction(user))
+    }
+  },[])
   const dispatch = useDispatch();
   const combiState = useSelector((state: RootState) => state);
   console.log("CObstate", combiState)
