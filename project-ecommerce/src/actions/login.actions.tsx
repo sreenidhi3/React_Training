@@ -1,4 +1,4 @@
-import { ClearUser, clearUserActionType, LoginErrorType, LoginRequestType, LoginUser, loginUserActionType, setLoginErrorType, setUserActionType } from "../types/login.types";
+import { ClearUser, clearUserActionType, LoginErrorType, LoginRequestType, LoginUser, loginUserActionType, logoutActionType, setLoginErrorType, setUserActionType } from "../types/login.types";
 
   //ACTIONS 
   export const loginUserAction=(payload:LoginRequestType):loginUserActionType=>{
@@ -6,6 +6,7 @@ import { ClearUser, clearUserActionType, LoginErrorType, LoginRequestType, Login
   }
 
   export const setUserAction = (payload: LoginUser):setUserActionType=>{
+    console.log("set", payload)
     return({type:"SET_USER", payload})
   }
   
@@ -16,4 +17,8 @@ import { ClearUser, clearUserActionType, LoginErrorType, LoginRequestType, Login
   
   export const setLoginError=(payload: LoginErrorType):setLoginErrorType=>{
     return({type:"LOGIN_ERROR", payload})
+  }
+
+  export const logoutUserAction=():logoutActionType=>{
+    return {type: "LOGOUT"}
   }

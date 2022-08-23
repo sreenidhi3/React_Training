@@ -36,14 +36,16 @@ export interface LoginActionsType{
     SET_USER: "SET_USER",
     CLEAR_USER: "CLEAR_USER",
     LOGIN_USER: "LOGIN_USER",
-    LOGIN_ERROR: "LOGIN_ERROR"
+    LOGIN_ERROR: "LOGIN_ERROR",
+    LOGOUT: "LOGOUT"
 }
   
 export const LoginReducerActionsType:LoginActionsType = {
     SET_USER: "SET_USER",
     CLEAR_USER: "CLEAR_USER",
     LOGIN_USER: "LOGIN_USER",
-    LOGIN_ERROR: "LOGIN_ERROR"
+    LOGIN_ERROR: "LOGIN_ERROR",
+    LOGOUT: "LOGOUT"
 }
 
 export interface setUserActionType{
@@ -64,4 +66,8 @@ export interface loginUserActionType{
 export interface setLoginErrorType{
     type: LoginActionsType["LOGIN_ERROR"],
     payload: LoginErrorType
+}
+
+export interface logoutActionType{
+    type: LoginActionsType["LOGOUT"]
 }

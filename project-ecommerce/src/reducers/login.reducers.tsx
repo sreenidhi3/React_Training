@@ -25,6 +25,9 @@ export const loginReducer = (state=initialState, action: LoginReducerActionType)
             console.log(action.payload)
             return {...initialState, isUserLoggedIn:false, ...action.payload}
         }
+        case "LOGOUT":{
+            return {...initialState}
+        }
         default:
             return state
     }

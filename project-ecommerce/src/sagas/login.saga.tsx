@@ -1,7 +1,8 @@
 import { call,put, all, takeEvery, takeLatest, fork } from "redux-saga/effects"
 import { login } from "../services/login.service";
-import { loginUserAction, setLoginError, setUserAction } from "../actions/login.actions";
+import { loginUserAction, logoutUserAction, setLoginError, setUserAction } from "../actions/login.actions";
 import { LoginResponseType, LoginActionsType, LoginReducerActionsType, LoginRequestType, loginUserActionType } from "../types/login.types";
+import { clearCartAction } from "../actions/products.actions";
 
 
 export function* workerLoginSaga(action:loginUserActionType){
@@ -19,7 +20,22 @@ export function* workerLoginSaga(action:loginUserActionType){
     }
 }
 
+export function* workerLogoutSaga(){
+    try{
+        console.log("in the worker logout saga ");
+        // yield put(setIsLoadingAction(true))
+        yield put (clearCartAction())
+        localStorage.removeItem("user")
+        localStorage.removeItem("cart")
+        yield put(logoutUserAction())
+        // yield put(setIsLoadingAction(false))
+    }catch(err){
+        console.log(err)
+    }
+}
+
 export function* watcherLoginSaga(){
     console.log("watcher login saga" )
     yield takeEvery(LoginReducerActionsType.LOGIN_USER, workerLoginSaga)
+    yield takeEvery(LoginReducerActionsType.CLEAR_USER, workerLogoutSaga)
 }
