@@ -7,6 +7,7 @@ import "../styles/navBar.styles.css"
 const NavBar = ()=>{
     const dispatch = useDispatch();
     const state = useSelector((state: RootState) => state.loginReducer);
+    const {cart} = useSelector((state: RootState) => state.productReducer);
     return(
         <nav className="navbar">
             <div className="brand-logo">
@@ -20,7 +21,7 @@ const NavBar = ()=>{
             { state.isUserLoggedIn ? (
                 <div className="nav-links">
                     <div className="nav-link">
-                    <Link to="/cart">Cart</Link>
+                    <Link to="/cart">Cart <span className="cart-count">{cart.length}</span></Link>
                     </div>
                     <div className="nav-link" onClick={()=>dispatch(clearUserAction())}>
                     <Link to="/">Logout</Link>
