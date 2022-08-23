@@ -6,6 +6,7 @@ import { setUserAction, loginUserAction } from '../actions/login.actions'
 // import { login } from '../services/login.service'
 // import { loginReducer } from '../reducers/login.reducers'
 import { RootState } from '../store'
+import { LoginUser } from '../types/login.types'
 const LoginForm =()=>{
     const state = useSelector((state: RootState) => state.loginReducer);
     const [email, setEmail] = useState<string>("")
@@ -14,9 +15,18 @@ const LoginForm =()=>{
     let navigate = useNavigate()
     const [errEmail, setErrEmail] = useState("")
     const [errPassword, setErrPassword] = useState("")
+    let user:LoginUser;
 
     useEffect(()=>{
+        if (localStorage.getItem("token")){
+            user = JSON.parse(localStorage.getItem('user') as string)
+            if(user!==null){
+                console.log("not here")
+                dispatch(setUserAction(user))
+            }
+        }
         if(state.isUserLoggedIn){
+            localStorage.setItem("user", JSON.stringify({email, token: state.user.token}))
             navigate("/products") 
         }
         // console.log("hi")
