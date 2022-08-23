@@ -8,8 +8,8 @@ import SignUp from './components/SignUp';
 import { useEffect } from 'react';
 import Catalogue from './pages/Catalogue';
 import { fecthAllCategories, fecthAllProducts } from './services/products.service';
-import { fetchCategoriesAction } from './types/products.types';
-import { checkoutAction, fetchProductsAction } from './actions/products.actions';
+import { fetchCategoriesAction, ProductType } from './types/products.types';
+import { checkoutAction, fetchProductsAction, setCartAction } from './actions/products.actions';
 import Cart from './pages/Cart';
 import ProdDetails from './pages/ProdDetails';
 import Error from './pages/Error';
@@ -38,6 +38,13 @@ const Success=()=>{
 
 function App() {
   let user:LoginUser;
+  let storedCart:ProductType[] = JSON.parse(localStorage.getItem("cart") as string)?.cart;;
+    useEffect(()=>{
+        if(storedCart && storedCart.length){
+            dispatch(setCartAction(storedCart))
+            console.log(storedCart)
+        }
+    },[])
   useEffect(()=>{
     user = JSON.parse(localStorage.getItem("user") as string)
     // console.log("here", localStorage.getItem("user"))
