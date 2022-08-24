@@ -57,27 +57,26 @@ const LoginForm =()=>{
         }
         setPassword(value)
     }    
-
-    console.log("Login", state)
     return(
         <div className='container'>
-            <form>
+            <form id="login-form">
             <h2>Welcome Back</h2>
+            <h3 style={{color: "var(--primary-color)"}}>Login to continue</h3>
                 <div className='label'>
                     <label htmlFor="email">Email:</label>
-                    <input value={email} placeholder="john.doe@email.com" id="email" type="email" onChange={(e)=>validateEmail(e.target.value)}/>
+                    <input value={email} placeholder="john.doe@email.com" id="email" type="email" role="email-input" onChange={(e)=>validateEmail(e.target.value)}/>
                     {errEmail ? (<div className='error-msg'>{errEmail}</div>) : ("")}
                     {/* <div className='error-msg'>{errEmail}</div> */}
                 </div>
                 <div className='label'>
                     <label htmlFor="password">Password:</label>
-                    <input value={password} placeholder="******" type="password" id="password" onChange={(e)=>validatePassword(e.target.value)}/>
+                    <input value={password} placeholder="******" type="password" id="password" role="password-input" onChange={(e)=>validatePassword(e.target.value)}/>
                     {errPassword ? (<div className='error-msg'>{errPassword}</div>) : ("")}
                     {/* <div className='error-msg'>{errPassword}</div> */}
                 </div>
-                {state.error ? (<div className='error-msg'>{state.error}</div>) : ("")}
+                {state.error ? (<div role="login-cred-error" className='error-msg'>{state.error}</div>) : ("")}
                 
-                <button type="button" className='btn-primary-full' disabled={(errEmail || errPassword) ? true : false } onClick={(e)=>handleSubmit(e)}>Submit</button>
+                <button type="button" role="submit-form" className='btn-primary-full' disabled={(errEmail || errPassword) ? true : false } onClick={(e)=>handleSubmit(e)}>Submit</button>
             </form>
         </div>
     )
