@@ -107,7 +107,7 @@ describe("check login reducer functions", ()=>{
 })
 
 describe("check login watcher saga",()=>{
-    let watcherItr:any;
+    let watcherItr:object;
     beforeAll(()=>{
         watcherItr = watcherLoginSaga();
     })
