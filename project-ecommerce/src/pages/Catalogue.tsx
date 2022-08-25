@@ -14,6 +14,9 @@ const Catalogue=()=>{
     
     const filteredProducts = useMemo(() =>{
         if(activeCategory){
+            if(search){
+                return activeProducts.filter((prod) =>prod.title.toLowerCase().includes(search.toLowerCase()))
+            }
            return activeProducts
         }else{
             return allProducts.filter((prod) =>prod.title.toLowerCase().includes(search.toLowerCase()))
