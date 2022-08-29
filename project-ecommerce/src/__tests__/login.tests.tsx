@@ -238,13 +238,13 @@ describe('check login form render', () => {
 
   test('must render error on wrong credentials sent to login api', async () => {
         fireEvent.change(screen.getByRole('email-input'), {
-            target: { value: 'eve.holt@gmail.com' },
+            target: { value: 'eve.holt@gmail.con' },
         });
         fireEvent.change(screen.getByRole('password-input'), {
             target: { value: 'citysi' },
         });
         fireEvent.click(screen.getByRole('submit-form'))
-        put(setLoginError({error: "user not found"}))
+        // put(setLoginError({error: "user not found"}))
         expect(await screen.findByText("user not found")).toBeInTheDocument()
     });
 });
