@@ -21,7 +21,7 @@ export const signUpReducer = (state=initialState, action: SignUpReducerActionTyp
             console.log(action.payload);
             return {...initialState, isUserSignedUp:false}
         }
-        case "LOGIN_ERROR":{
+        case "SIGN_UP_ERROR":{
             console.log(action.payload)
             return {...initialState, isUserSignedUp:false, ...action.payload}
         }
