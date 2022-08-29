@@ -39,7 +39,7 @@ const Catalogue=()=>{
                         {cate}
                     </div>
                 )}
-                {activeCategory ? <button onClick={()=>dispatch(setActiveCategoryAction(""))}> Remove Filter</button>:""}
+                {activeCategory ? <button role="filter-btn" onClick={()=>dispatch(setActiveCategoryAction(""))}> Remove Filter</button>:""}
             </div>
             <div className="row center">
             {(filteredProducts.map((prod)=><ProductCard key={prod.id} {...prod}/>))}
