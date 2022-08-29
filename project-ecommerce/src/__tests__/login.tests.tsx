@@ -107,7 +107,7 @@ describe("check login reducer functions", ()=>{
 })
 
 describe("check login watcher saga",()=>{
-    let watcherItr:object;
+    let watcherItr=watcherLoginSaga();
     beforeAll(()=>{
         watcherItr = watcherLoginSaga();
     })
@@ -238,12 +238,12 @@ describe('check login form render', () => {
 
   test('must render error on wrong credentials sent to login api', async () => {
         fireEvent.change(screen.getByRole('email-input'), {
-            target: { value: 'eve.holt@reqres.com' },
+            target: { value: 'eve.holt@gmail.com' },
         });
         fireEvent.change(screen.getByRole('password-input'), {
-            target: { value: 'citysiop' },
+            target: { value: 'citysi' },
         });
-    fireEvent.click(screen.getByRole('submit-form'))
+        fireEvent.click(screen.getByRole('submit-form'))
         put(setLoginError({error: "user not found"}))
         expect(await screen.findByText("user not found")).toBeInTheDocument()
     });
