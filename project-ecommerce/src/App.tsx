@@ -7,7 +7,7 @@ import LoginForm from './components/LoginForm';
 import SignUp from './components/SignUp';
 import { useEffect } from 'react';
 import Catalogue from './pages/Catalogue';
-import { fecthAllCategories, fecthAllProducts } from './services/products.service';
+import { fetchAllCategories, fetchAllProducts } from './services/products.service';
 import { fetchCategoriesAction, ProductType } from './types/products.types';
 import { checkoutAction, fetchProductsAction, setCartAction } from './actions/products.actions';
 import Cart from './pages/Cart';
@@ -38,7 +38,13 @@ const Success=()=>{
 
 function App() {
   let user:LoginUser;
-  let storedCart:ProductType[] = JSON.parse(localStorage.getItem("cart") as string)?.cart;;
+  
+  let storedCart:ProductType[] ;
+  try{
+    storedCart= JSON.parse(localStorage.getItem("cart") as string)?.cart;;
+  }catch(err){
+    storedCart=[]
+  }
     useEffect(()=>{
         if(storedCart && storedCart.length){
             dispatch(setCartAction(storedCart))
@@ -46,11 +52,16 @@ function App() {
         }
     },[])
   useEffect(()=>{
-    user = JSON.parse(localStorage.getItem("user") as string)
-    // console.log("here", localStorage.getItem("user"))
-    if(user){
-      dispatch(setUserAction(user))
+    try{
+      user = JSON.parse(localStorage.getItem("user") as string)
+      if(user){
+        dispatch(setUserAction(user))
+      }
+    }catch(err){
+      console.log(err)
     }
+    // console.log("here", localStorage.getItem("user"))
+    
   },[])
   const dispatch = useDispatch();
   const combiState = useSelector((state: RootState) => state);
@@ -59,8 +70,6 @@ function App() {
   useEffect(()=>{
       dispatch(fetchCategoriesAction())
       dispatch(fetchProductsAction())
-      // fecthAllProducts().then(data=>console.log(data))
-      // fecthAllCategories().then(data=>console.log(data))
   }, [])
   console.log(state)
   return (
