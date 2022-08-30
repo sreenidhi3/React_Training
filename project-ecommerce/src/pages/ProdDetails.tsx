@@ -8,11 +8,13 @@ import { ProductType } from "../types/products.types";
 interface props{
     id: number
 }
-const SingleProduct:FC<props>=({id})=>{
+export const SingleProduct:FC<props>=({id})=>{
+    const {isUserLoggedIn} = useSelector((state: RootState) => state.loginReducer);
     const {allProducts,cart} = useSelector((state: RootState) => state.productReducer);
     const [product, setProduct] = useState<ProductType>(allProducts[1])
     const [added, setAdded] = useState<boolean>(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
     useEffect(()=>{
         let p:ProductType = allProducts.filter((prod)=>prod.id === id)[0];
         console.log(p, id)
@@ -22,12 +24,16 @@ const SingleProduct:FC<props>=({id})=>{
     }, [id])
     
     const handleCart=(id:number)=>{
-        if(added){
-            dispatch(removeFromCartActionA(id))
-        }else{
-            dispatch(addToCartActionA(id))
+        if(!isUserLoggedIn)
+            navigate("/login")
+        else{
+            if(added){
+                dispatch(removeFromCartActionA(id))
+            }else{
+                dispatch(addToCartActionA(id))
+            }
+            setAdded(!added)
         }
-        setAdded(!added)
     }
     return (
     <div className="p-2 col center"> 
