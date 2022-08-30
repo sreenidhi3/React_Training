@@ -1,18 +1,12 @@
 import { fireEvent, render, screen, waitFor } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
 import { Provider, useDispatch } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import { call, put, takeEvery } from "redux-saga/effects";
-import { JsonObjectExpression } from "typescript";
-import { workerData } from "worker_threads";
 import { addToCartAction, clearCartAction, removeFromCartAction, setActiveCategoryAction, setCategoriesAction, setProductsAction } from "../actions/products.actions";
 import App from "../App";
-import Cart from "../pages/Cart";
-import Catalogue from "../pages/Catalogue";
 import { productReducer } from "../reducers/product.reducers";
 import { watcherProductsSaga, workerRemoveFromCartSaga, workerAddToCartSaga, workerCheckoutSaga, workerCategoriesFetchSaga, workerProductsFetchSaga } from "../sagas/products.saga";
 import {fetchAllCategories, fetchAllProducts} from "../services/products.service"
-import store from "../store";
 import { ProductsReducerActionsType, ProductStateType, ProductType, singleCategoryType } from "../types/products.types";
 import configureStore from 'redux-mock-store';
 
